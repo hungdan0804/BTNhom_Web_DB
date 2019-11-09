@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mysql=require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,10 +40,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-var mongoose = require('mongoose');
-var uri = "mongodb+srv://1712316-1712324:316324web@cluster0-vgvek.azure.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(uri);
-mongoose.Promise=global.Promise;
-var db=mongoose.connection;
-db.on('error',console.error.bind(console,'MongoDB Connection error:'));

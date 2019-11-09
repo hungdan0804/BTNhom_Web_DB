@@ -1,28 +1,27 @@
 var express = require('express');
+var mysql = require('mysql')
 var router = express.Router();
-var app = express();
+var name = "";
 
-var mongoose=require('mongoose');
-var Item = require('../Models/Item');
-
+var con=mysql.createConnection({
+    host:"remotemysql.com",
+    user:"z66oihq6CP",
+    password: "D5UVmEnBZU",
+    database: "z66oihq6CP"
+});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // const item = new Item({
-  //   id:new mongoose.Types.ObjectId(),
-  //   name: "Ghế dựa trắng",
-  //   price: "300000"
-  // });
-  // item.save().then(result=>{
-  //   console.log(result);
-  // }).catch(err=> console.log(err));
   res.render('index', { title: 'Express', });
 });
 router.get('/shop', function(req, res, next) {
   res.render('shop', { title: 'Express' });
 });
 router.get('/san-pham', function(req, res, next) {
-  res.render('san_pham', { title: 'Express' });
+    con.query("SELECT * FROM Items", function (err, result, fields) {
+        if (err) throw err;
+        res.render('san_pham', { item_name:result[0].NAME,item_price:result[0].PRICE});
+    });
 });
 router.get('/gio-hang', function(req, res, next) {
   res.render('gio_hang', { title: 'Express' });
