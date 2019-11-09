@@ -12,7 +12,10 @@ var con=mysql.createConnection({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', });
+    con.query("SELECT * FROM Items", function (err, result, fields) {
+        if (err) throw err;
+        res.render('index', {title: 'Express', products: result});
+    });
 });
 router.get('/shop', function(req, res, next) {
   res.render('shop', { title: 'Express' });
