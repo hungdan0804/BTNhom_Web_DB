@@ -6,10 +6,9 @@
             <div class="col-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-50">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="#">Nội thất</a></li>
-                        <li class="breadcrumb-item"><a href="#">Ghế</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{item_name}}</li>
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{product.category}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
                     </ol>
                 </nav>
             </div>
@@ -19,7 +18,7 @@
             <div class="col-12 col-lg-7">
                 <div class="single_product_thumb">
                     <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
+                        <!--<ol class="carousel-indicators">
                             <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
                             </li>
                             <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
@@ -28,26 +27,11 @@
                             </li>
                             <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
                             </li>
-                        </ol>
+                        </ol>-->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                    <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
-                                </a>
-                            </div>
-                            <div class="carousel-item">
-                                <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                    <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
-                                </a>
-                            </div>
-                            <div class="carousel-item">
-                                <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                    <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
-                                </a>
-                            </div>
-                            <div class="carousel-item">
-                                <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                    <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                <a class="gallery_img" href="img/bg-img/{{product.id}}.jpg">
+                                    <img class="d-block w-100" src="img/bg-img/{{product.id}}.jpg" alt="First slide">
                                 </a>
                             </div>
                         </div>
@@ -59,9 +43,9 @@
                     <!-- Product Meta Data -->
                     <div class="product-meta-data">
                         <div class="line"></div>
-                        <p class="product-price">{{item_price}} VND</p>
+                        <p class="product-price">{{product.price}} VND</p>
                         <a href="product-details.html">
-                            <h6>{{item_name}}</h6>
+                            <h6>{{product.name}}</h6>
                         </a>
                         <!-- Ratings & Review -->
                         <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -77,12 +61,11 @@
                             </div>
                         </div>
                         <!-- Avaiable -->
-                        <p class="avaibility"><i class="fa fa-circle"></i> Còn hàng</p>
+                        <p class="avaibility"><i class="fa fa-circle"></i> {{product.status}}</p>
                     </div>
 
                     <div class="short_overview my-5">
-                        <p>Ghế giải trí, ghế phòng ăn<br>Màu Tuy chọn : màu đen , xám , xanh lá , xanh dương , cam , vàng , xanh ngọc, đỏ <br>Chất liệu Nhựa Polypropylene (PP) ; Lớp vỏ chống tia UV ; Chân gỗ tự nhiên & Thép nền liên kết sơn tĩnh điện Kích thước ghế: cao 42 cm , ngang 38,5 cm , dài 38,5 cm , tổng chiều cao ghế 83cm Kích thức bàn : cao 75cm , mặt bàn vuông , tròn 60cm ( có 2 màu đen , trắng) Mô tả Phù hợp làm bàn trà, bàn cafe, bàn ăn. Cơ sở sản xuất bàn ghế MAI NGUYỄN chuyên cung cấp bàn ghế số lượng lớn dùng cho quán cafe , nhà hàng, ...giá rẻ , chất lượng.
-                        </p>
+                        <p>{{{product.description}}}</p>
                     </div>
 
                     <!-- Add to Cart Form -->

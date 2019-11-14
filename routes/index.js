@@ -1,30 +1,25 @@
 var express = require('express');
-var mysql = require('mysql')
+var db = require('../utils/database');
 var router = express.Router();
 var name = "";
-
-var con=mysql.createConnection({
-    host:"remotemysql.com",
-    user:"z66oihq6CP",
-    password: "D5UVmEnBZU",
-    database: "z66oihq6CP"
-});
-
+const mysql = require('mysql');
+const models = require('../DAO/models');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    con.query("SELECT * FROM Items", function (err, result, fields) {
+    models.Products.GetAll(function (err, result) {
         if (err) throw err;
         res.render('index', {title: 'Express', products: result});
-    });
+    })
 });
 router.get('/shop', function(req, res, next) {
   res.render('shop', { title: 'Express' });
 });
-router.get('/san-pham', function(req, res, next) {
-    con.query("SELECT * FROM Items", function (err, result, fields) {
+router.get('/san-pham-:id', function(req, res, next) {
+    const id = req.params["id"];
+    models.Products.GetProductById(id, function (err, result) {
         if (err) throw err;
-        res.render('san_pham', { item_name:result[0].NAME,item_price:result[0].PRICE});
-    });
+        res.render('san_pham', { product: result});
+    })
 });
 router.get('/gio-hang', function(req, res, next) {
   res.render('gio_hang', { title: 'Express' });
