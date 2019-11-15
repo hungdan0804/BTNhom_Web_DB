@@ -48,7 +48,17 @@ module.exports = {
             if (err)
                 callback(err,null);
             else {
-                callback(null,result);
+                callback(null,result[0]);
+            }
+        })
+    },
+    CountItem: function (id, callback) {
+        const sql="SELECT COUNT(id) AS count FROM Items";
+        db.Query(sql, function (err, result) {
+            if (err)
+                callback(err,null);
+            else {
+                callback(null,result[0]);
             }
         })
     },

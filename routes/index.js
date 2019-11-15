@@ -11,15 +11,28 @@ router.get('/', function(req, res, next) {
         res.render('index', {title: 'Express', products: result});
     })
 });
+router.get('/shop', function(req, res, next) {
+    const id = req.params["id"];
+    models.Category.GetAll(function (err,listCategories) {
+        if(err)throw err;
+        models.Products.GetAll(function (err, listProduct) {
+            if (err) throw err;
+            models.Products.CountItem(id,function (err,count){
+                if (err) throw err;
+                res.render('shop', {category: listCategories, product: listProduct, item_count: count});
+            })
+        })
+    })
+});
 router.get('/shop-:id', function(req, res, next) {
     const id = req.params["id"];
-    models.Category.GetAll(function (err,result) {
+    models.Category.GetAll(function (err,listCategories) {
        if(err)throw err;
-        models.Products.GetProductByCategoryId(id, function (err, result2) {
+        models.Products.GetProductByCategoryId(id, function (err, listProduct) {
             if (err) throw err;
-            models.Products.CountItemGroupByCategoryId(id,function (err,result3){
+            models.Products.CountItemGroupByCategoryId(id,function (err,count){
                 if (err) throw err;
-                res.render('shop', {category: result, product: result2, item_count: result3[0]});
+                res.render('shop', {category: listCategories, product: listProduct, item_count: count});
             })
         })
    })

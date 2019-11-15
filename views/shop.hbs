@@ -6,6 +6,11 @@
         <h6 class="widget-title mb-30">Loại</h6>
 
         <!--  Catagories  -->
+        <div class="catagories-menu">
+            <ul>
+                <li ><a href="/shop">Tất cả</a></li>
+            </ul>
+        </div>
         {{#category}}
         <div class="catagories-menu">
             <ul>
@@ -15,40 +20,17 @@
         {{/category}}
     </div>
 
-    <!-- ##### Single Widget ##### -->
+    <!--
     <div class="widget brands mb-50">
-        <!-- Widget Title -->
         <h6 class="widget-title mb-30">Gian hàng</h6>
-
         <div class="widget-desc">
-            <!-- Single Form Check -->
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="amado">
                 <label class="form-check-label" for="amado">Amado</label>
             </div>
-            <!-- Single Form Check -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="ikea">
-                <label class="form-check-label" for="ikea">Ikea</label>
-            </div>
-            <!-- Single Form Check -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="furniture">
-                <label class="form-check-label" for="furniture">Furniture Inc</label>
-            </div>
-            <!-- Single Form Check -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="factory">
-                <label class="form-check-label" for="factory">The factory</label>
-            </div>
-            <!-- Single Form Check -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="artdeco">
-                <label class="form-check-label" for="artdeco">Artdeco</label>
-            </div>
         </div>
     </div>
-
+    -->
     <!-- ##### Single Widget ##### -->
     <div class="widget color mb-50">
         <!-- Widget Title -->
@@ -138,12 +120,13 @@
             <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                 <div class="single-product-wrapper">
                     <!-- Product Image -->
+                    <a href="/san-pham-{{ID}}">
                     <div class="product-img">
-                        <img src="img/bg-img/{{ID}}.jpg" alt="">
+                        <img style='height: 500px; width: 100%; object-fit: cover' src="img/bg-img/{{ID}}.jpg" alt="">
                         <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/{{ID}}.jpg" alt="">
+                        <img class="hover-img" style='height: 500px; width: 100%; object-fit: cover' src="img/product-img/product{{ID}}.jpg" alt="">
                     </div>
-
+                    </a>
                     <!-- Product Description -->
                     <div class="product-description d-flex align-items-center justify-content-between">
                         <!-- Product Meta Data -->
@@ -175,7 +158,7 @@
 
         <div class="row">
             <div class="col-12">
-                <!-- Pagination -->
+                <!-- Pagination
                 <nav aria-label="navigation">
                     <ul class="pagination justify-content-end mt-50">
                         <li class="page-item active"><a class="page-link" href="#">01.</a></li>
@@ -184,6 +167,7 @@
                         <li class="page-item"><a class="page-link" href="#">04.</a></li>
                     </ul>
                 </nav>
+                -->
             </div>
         </div>
     </div>
