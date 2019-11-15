@@ -11,8 +11,18 @@ router.get('/', function(req, res, next) {
         res.render('index', {title: 'Express', products: result});
     })
 });
-router.get('/shop', function(req, res, next) {
-  res.render('shop', { title: 'Express' });
+router.get('/shop-:id', function(req, res, next) {
+    const id = req.params["id"];
+    models.Category.GetAll(function (err,result) {
+       if(err)throw err;
+        models.Products.GetProductByCategoryId(id, function (err, result2) {
+            if (err) throw err;
+            models.Products.CountItemGroupByCategoryId(id,function (err,result3){
+                if (err) throw err;
+                res.render('shop', {category: result, product: result2, item_count: result3[0]});
+            })
+        })
+   })
 });
 router.get('/san-pham-:id', function(req, res, next) {
     const id = req.params["id"];

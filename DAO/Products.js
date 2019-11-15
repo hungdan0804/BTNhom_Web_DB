@@ -31,4 +31,25 @@ module.exports = {
 
         })
     },
+    GetProductByCategoryId: function (id, callback) {
+        const sql = "select * from Items p, category c where c.category_id=" + id + " and c.category_id=p.CATEGORY_ID";
+        db.Query(sql, function (err, result) {
+            if (err)
+                callback(err,null);
+            else {
+                callback(null,result);
+            }
+
+        })
+    },
+    CountItemGroupByCategoryId: function (id, callback) {
+        const sql="SELECT CATEGORY_ID,COUNT(id) AS count FROM Items WHERE CATEGORY_ID="+id+" GROUP BY CATEGORY_ID";
+        db.Query(sql, function (err, result) {
+            if (err)
+                callback(err,null);
+            else {
+                callback(null,result);
+            }
+        })
+    },
 }

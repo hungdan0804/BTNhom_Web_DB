@@ -6,17 +6,13 @@
         <h6 class="widget-title mb-30">Loại</h6>
 
         <!--  Catagories  -->
+        {{#category}}
         <div class="catagories-menu">
             <ul>
-                <li class="active"><a href="#">Ghế</a></li>
-                <li><a href="#">Giường</a></li>
-                <li><a href="#">Phụ kiện</a></li>
-                <li><a href="#">Nội thất</a></li>
-                <li><a href="#">Trang trí</a></li>
-                <li><a href="#">Trang phục</a></li>
-                <li><a href="#">Điện thử</a></li>
+                <li ><a href="/shop-{{category_id}}">{{name}}</a></li>
             </ul>
         </div>
+        {{/category}}
     </div>
 
     <!-- ##### Single Widget ##### -->
@@ -98,7 +94,11 @@
                 <div class="product-topbar d-xl-flex align-items-end justify-content-between">
                     <!-- Total Products -->
                     <div class="total-products">
-                        <p>1-8 / 25</p>
+                        {{#if item_count}}
+                            <p>1-{{item_count.count}}/{{item_count.count}}</p>
+                        {{else}}
+                            <p>0-0/0</p>
+                        {{/if}}
                         <div class="view d-flex">
                             <a href="#"><i class="fa fa-th-large" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -133,15 +133,15 @@
         </div>
 
         <div class="row">
-
+            {{#product}}
             <!-- Single Product Area -->
             <div class="col-12 col-sm-6 col-md-12 col-xl-6">
                 <div class="single-product-wrapper">
                     <!-- Product Image -->
                     <div class="product-img">
-                        <img src="img/product-img/product1.jpg" alt="">
+                        <img src="img/bg-img/{{ID}}.jpg" alt="">
                         <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product2.jpg" alt="">
+                        <img class="hover-img" src="img/product-img/{{ID}}.jpg" alt="">
                     </div>
 
                     <!-- Product Description -->
@@ -149,9 +149,9 @@
                         <!-- Product Meta Data -->
                         <div class="product-meta-data">
                             <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
+                            <p class="product-price">{{PRICE}} VNĐ</p>
+                            <a href="/san-pham-{{ID}}">
+                                <h6>{{NAME}}</h6>
                             </a>
                         </div>
                         <!-- Ratings & Cart -->
@@ -170,191 +170,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
-                        <img src="img/product-img/product2.jpg" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product3.jpg" alt="">
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="gio-hang" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
-                        <img src="img/product-img/product3.jpg" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product4.jpg" alt="">
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="gio-hang" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
-                        <img src="img/product-img/product4.jpg" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product5.jpg" alt="">
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="gio-hang" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
-                        <img src="img/product-img/product5.jpg" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product6.jpg" alt="">
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="gio-hang" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <div class="product-img">
-                        <img src="img/product-img/product6.jpg" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" src="img/product-img/product1.jpg" alt="">
-                    </div>
-
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">1.800.000 VNĐ</p>
-                            <a href="product-details">
-                                <h6>Ghế</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="gio-hang" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {{/product}}
         </div>
 
         <div class="row">
