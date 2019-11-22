@@ -1,32 +1,15 @@
-var express = require('express');
-var db = require('../utils/database');
-var router = express.Router();
-var name = "";
-const mysql = require('mysql');
-const models = require('../DAO/models');
+const express = require('express');
+const database = require('../utils/Database');
+const router = express.Router();
+const models = require('../Models/models');
+const ShopController = require('../controllers/ShopController');
+const ProductController = require('../controllers/ProductControllers');
+const HomeController = require('../controllers/HomeControllers');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    models.Products.GetAll(function (err, result) {
-        if (err) throw err;
-        res.render('index', {title: 'Express', products: result});
-    })
-});
-router.get('/shop', function(req, res, next) {
-    const id = req.params["id"];
-    models.Category.GetAll(function (err,listCategories) {
-        if(err)throw err;
-        models.Products.GetAll(function (err, listProduct) {
-            if (err) throw err;
-            models.Products.CountItem(id,function (err,count){
-                if (err) throw err;
-                res.render('shop', {category: listCategories, product: listProduct, item_count: count});
-            })
-        })
-    })
-});
-router.get('/shop-:id', function(req, res, next) {
-    const id = req.params["id"];
-    models.Category.GetAll(function (err,listCategories) {
+router.get('/', HomeController.Home);
+router.get('/shop', ShopController.Shop);
+router.get('/product', ProductController.Product);
+/*models.Category.GetAll(function (err,listCategories) {
        if(err)throw err;
         models.Products.GetProductByCategoryId(id, function (err, listProduct) {
             if (err) throw err;
@@ -35,15 +18,8 @@ router.get('/shop-:id', function(req, res, next) {
                 res.render('shop', {category: listCategories, product: listProduct, item_count: count});
             })
         })
-   })
-});
-router.get('/san-pham-:id', function(req, res, next) {
-    const id = req.params["id"];
-    models.Products.GetProductById(id, function (err, result) {
-        if (err) throw err;
-        res.render('san_pham', { product: result});
-    })
-});
+})*/
+
 router.get('/gio-hang', function(req, res, next) {
   res.render('gio_hang', { title: 'Express' });
 });
@@ -65,4 +41,5 @@ router.get('/quen-mat-khau', function(req, res, next) {
 router.get('/top10', function(req, res, next) {
   res.render('top10', { title: 'Express' });
 });
+
 module.exports = router;

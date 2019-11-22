@@ -1,11 +1,49 @@
-const db = require("../utils/database")
-module.exports = {
+const database = require("../utils/Database");
+class Product {
+    constructor() {
+        this.ID = 0;
+        this.NAME = "";
+        this.DESCRIPTION = "";
+        this.CATEGORY_ID = 0;
+        this.PRICE = 0;
+    }
+    static GetAll() {
+        return new Promise((resolve, reject) => {
+            database.query("select * from product")
+                    .then(dataset =>resolve(dataset))
+                    .catch(err => reject(err))
+        })
+    }
+    static findById(id) {
+        return new Promise((resolve, reject) => {
+            const sql = 'select * from product where ID=' + id;
+            database.query(sql)
+                .then(dataset => resolve(dataset[0]))
+                .catch(err => reject(err));
+        })
+    }
+    static findByCategory(category_id) {
+        return new Promise((resolve, reject) => {
+            const sql = "select * from product p, category c where c.category_id=" + id + " and c.category_id=p.CATEGORY_ID";
+            database.query(sql)
+                .then(dataset => resolve(dataset))
+                .catch(err => reject(err));
+        })
+    }
+}
+module.exports = Product;
+/*{
     GetAll: function (callback) {
         db.GetAllFromTable("Items", function (err, result) {
             if (err)
                 callback(err,null);
             else
                 callback(null,result);
+        })
+    },
+    getall: () => {
+        db.GetAllFromTable("Items", function (err, result) {
+            return result;
         })
     },
     findById: function (id, callback) {
@@ -25,7 +63,7 @@ module.exports = {
             if (err)
                 callback(err,null);
             else {
-                const product = require("../models/ProductModel").Product(result[0]);
+                const product = require("../ViewModels/ProductModel").Product(result[0]);
                 callback(null,product);
             }
 
@@ -62,4 +100,4 @@ module.exports = {
             }
         })
     },
-}
+}*/

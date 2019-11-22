@@ -7,8 +7,8 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mt-50">
                         <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="/shop-{{product.category_id}}">{{product.category}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{product.name}}</li>
+                        <li class="breadcrumb-item"><a href="/shop-{{product.CATEGORY_ID}}">{{product.CATEGORY}}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{product.NAME}}</li>
                     </ol>
                 </nav>
             </div>
@@ -30,8 +30,8 @@
                         </ol>-->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a class="gallery_img" href="img/bg-img/{{product.id}}.jpg">
-                                    <img class="d-block w-100" src="img/bg-img/{{product.id}}.jpg" alt="First slide">
+                                <a class="gallery_img" href="img/bg-img/{{product.ID}}.jpg">
+                                    <img class="d-block w-100" src="img/bg-img/{{product.ID}}.jpg" alt="First slide">
                                 </a>
                             </div>
                         </div>
@@ -43,9 +43,9 @@
                     <!-- Product Meta Data -->
                     <div class="product-meta-data">
                         <div class="line"></div>
-                        <p class="product-price">{{product.price}} VND</p>
+                        <p class="product-price">{{product.PRICE}} VND</p>
                         <a href="product-details.html">
-                            <h6>{{product.name}}</h6>
+                            <h6>{{product.NAME}}</h6>
                         </a>
                         <!-- Ratings & Review -->
                         <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
@@ -61,11 +61,11 @@
                             </div>
                         </div>
                         <!-- Avaiable -->
-                        <p class="avaibility"><i class="fa fa-circle"></i> {{product.status}}</p>
+                        <p class="avaibility"><i class="fa fa-circle"></i> {{product.STATUS}}</p>
                     </div>
 
                     <div class="short_overview my-5">
-                        <p>{{{product.description}}}</p>
+                        <p>{{{product.DESCRIPTION}}}</p>
                     </div>
 
                     <!-- Add to Cart Form -->
