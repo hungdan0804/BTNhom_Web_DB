@@ -24,7 +24,15 @@ class Product {
     }
     static findByCategory(category_id) {
         return new Promise((resolve, reject) => {
-            const sql = "select * from product p, category c where c.category_id=" + id + " and c.category_id=p.CATEGORY_ID";
+            const sql = "select * from product p, category c where c.category_id=" + category_id + " and c.category_id=p.CATEGORY_ID";
+            database.query(sql)
+                .then(dataset => resolve(dataset))
+                .catch(err => reject(err));
+        })
+    }
+    static getByColor(color_name) {
+        return new Promise((resolve, reject) => {
+            const sql = "select * from product p, color c where c.name='" + color_name + "' and c.id=p.COLOR_ID";
             database.query(sql)
                 .then(dataset => resolve(dataset))
                 .catch(err => reject(err));
