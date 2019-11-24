@@ -30,7 +30,12 @@ exports.Shop = (req, res, next) => {
             return models.Color.GetAll();
         }).then(listColor => {
             listColors = listColor;
-            return models.Products.findByCategory(id);
+            if (ref_color == undefined) {
+                return models.Products.findByCategory(id);
+            }
+            else {
+                return models.Products.findByCategoryColor(id, ref_color);
+            }
         }).then(listProduct => {
             listProducts = listProduct;
             count = listProducts.length;

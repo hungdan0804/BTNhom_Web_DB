@@ -1,4 +1,5 @@
 const database = require("../utils/Database");
+const dbColor = require("./ColorModel");
 class Product {
     constructor() {
         this.ID = 0;
@@ -6,6 +7,7 @@ class Product {
         this.DESCRIPTION = "";
         this.CATEGORY_ID = 0;
         this.PRICE = 0;
+        this.COLOR_ID = 0;
     }
     static GetAll() {
         return new Promise((resolve, reject) => {
@@ -28,6 +30,18 @@ class Product {
             database.query(sql)
                 .then(dataset => resolve(dataset))
                 .catch(err => reject(err));
+        })
+    }
+    static findByCategoryColor(category_id, color_name) {
+        let listProduct, color;
+        return new Promise((resolve, reject) => {
+            dbColor.getByName(color_name).then(rs => {
+                color = rs;
+                return this.findByCategory(category_id);
+            }).then(list => {
+                listProduct = list.filter(n => n.COLOR_ID==color.id);
+                resolve(listProduct);
+            })
         })
     }
     static getByColor(color_name) {

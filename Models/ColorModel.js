@@ -14,8 +14,14 @@ class Color {
     }
     static getByName(name) {
         return new Promise((resolve, reject) => {
-            database.query("select * from color where name=" + name)
-                .then(dataset =>resolve(dataset[0]))
+            let sql = "select * from color where name='" + name + "'";
+            database.query(sql)
+                .then(dataset => {
+                    if (dataset == null || dataset.length == 0)
+                        resolve(dataset);
+                    else
+                        resolve(dataset[0])
+                })
                 .catch(err => reject(err))
         })
     }
