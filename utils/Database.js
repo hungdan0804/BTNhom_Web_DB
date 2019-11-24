@@ -1,17 +1,18 @@
 const mysql = require('mysql');
+const dotenv=require('dotenv').config();
 const con = mysql.createConnection({
-    host:"remotemysql.com",
-    user:"z66oihq6CP",
-    password: "D5UVmEnBZU",
-    database: "z66oihq6CP"
+    host:process.env.DB_SERVER,
+    user:process.env.DB_USERNAME,
+    password:process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 class Database {
     constructor() {
         this.connection = mysql.createConnection({
-            host:"remotemysql.com",
-            user:"z66oihq6CP",
-            password: "D5UVmEnBZU",
-            database: "z66oihq6CP"
+            host:process.env.DB_SERVER,
+            user:process.env.DB_USERNAME,
+            password:process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
         });
     }
     query( sql, args ) {
