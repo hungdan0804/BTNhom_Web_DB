@@ -197,7 +197,7 @@
     function ProducerSearch() {
         const checkboxes = document.getElementsByName("producer_checkbox");
         let oldUrl = window.location.href;
-        let newUrl = oldUrl.replace(/(&?)producer=\d+(&?)/i, "").replace(/\?$/,"");
+        let newUrl = oldUrl.replace(/(&?)producer=\d+(&?)/gi, "").replace(/\?$/,"");
         for (let i = 0; i< checkboxes.length; i++) {
             if (checkboxes[i].checked) {
                 let value = checkboxes[i].value;
@@ -211,4 +211,19 @@
         }
         window.location.href = newUrl;
     }
+    function PageLoaded() {
+        let url = window.location.href.toLowerCase();
+        let checkboxes = document.getElementsByName("producer_checkbox");
+        let producers = [...url.matchAll(/producer=\d+/g)];
+        producers.forEach(producer => {
+            const producer_id = producer[0].replace("producer=","");
+            for (let i=0; i<checkboxes.length; i++) {
+                if (checkboxes[i].value==producer_id) {
+                    checkboxes[i].checked = true;
+                    break;
+                }
+            }
+        })
+    }
+    document.addEventListener("DOMContentLoaded", PageLoaded);
 </script>

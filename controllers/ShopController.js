@@ -55,6 +55,9 @@ exports.Shop = (req, res, next) => {
             return models.Products.GetAll();
         }
         else {
+            if (Array.isArray(ref_category)) {
+                ref_category = ref_category[0];
+            }
             return models.Products.findByCategory(ref_category);
         }
     }).then(listProduct => {
