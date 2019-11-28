@@ -1,8 +1,8 @@
 const product = require("./ProductsModel");
 const category= require("./CategoryModel");
-const color = require("./ColorModel");
+const producer = require("./ProducerModel");
 module.exports = {
     Products: product,
     Category: category,
-    Color: color,
+    Producer: producer,
 };

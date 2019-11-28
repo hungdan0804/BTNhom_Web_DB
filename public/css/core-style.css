@@ -1366,7 +1366,8 @@ img {
       border-radius: 0;
       border: none; }
       .product-topbar .nice-select .list .option.selected {
-        color: #fbb710; }
+        /*color: #fbb710; */
+      }
 
 /* :: 10.0 Checkout Area CSS */
 .checkout_details_area form .form-control {

@@ -20,30 +20,33 @@
         {{/category}}
     </div>
 
-    <!--
+
     <div class="widget brands mb-50">
         <h6 class="widget-title mb-30">Gian hàng</h6>
         <div class="widget-desc">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="amado">
-                <label class="form-check-label" for="amado">Amado</label>
+                {{#producers}}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="{{producer_id}}" name="producer_checkbox">
+                        {{name}}
+                    </label>
+                </div>
+                {{/producers}}
             </div>
         </div>
     </div>
-    -->
+
     <!-- ##### Single Widget ##### -->
-    <div class="widget color mb-50">
-        <!-- Widget Title -->
+    <!--<div class="widget color mb-50">
         <h6 class="widget-title mb-30">Màu</h6>
 
         <div class="widget-desc">
             <ul class="d-flex">
-                {{#colors}}
-                    <li><a onclick="Color('{{name}}')" style="background-color: {{hexcolor}}"></a></li>
-                {{/colors}}
+                    <li><a onclick="Color('')" style="background-color: "></a></li>
             </ul>
         </div>
-    </div>
+    </div>-->
 
     <!-- ##### Single Widget ##### -->
     <div class="widget price mb-50">
@@ -61,6 +64,9 @@
             </div>
         </div>
     </div>
+    <dic class="widget mb-50">
+        <button type="button" class="btn btn-outline-primary btn-block" onclick="ProducerSearch()">Search</button>
+    </dic>
 </div>
 
 <div class="amado_product_area section-padding-100">
@@ -86,10 +92,11 @@
                         <div class="sort-by-date d-flex align-items-center mr-15">
                             <p>Sắp xếp theo</p>
                             <form action="#" method="get">
-                                <select name="select" id="sortBydate">
-                                    <option value="value">Ngày</option>
-                                    <option value="value">Mới nhất</option>
-                                    <option value="value">Phổ biến nhất</option>
+                                <select name="select" id="sortBydate" onchange="SortFilter()">
+                                    <option data-display="{{sort_value}}" value="newest">Mới nhất</option>
+                                    <option value="oldest">Cũ nhất</option>
+                                    <option value="lowest">Giá thấp nhất</option>
+                                    <option value="highest">Giá cao nhất</option>
                                 </select>
                             </form>
                         </div>
@@ -168,20 +175,39 @@
     </div>
 </div>
 <script>
-    function Color(color) {
+    function SortFilter() {
+        let sort_selector = document.getElementById("sortBydate");
+        let value = sort_selector.options[sort_selector.selectedIndex].value;
         let oldUrl = window.location.href;
         let newUrl = oldUrl;
-        if (oldUrl.match(/color=[a-zA-Z]+/) == undefined) {
+        if (oldUrl.match(/sort=[a-zA-Z]+/) == undefined) {
             if (oldUrl.indexOf("?") == -1) {
-                newUrl = oldUrl + "?color=" + color;
+                newUrl = oldUrl + "?sort=" + value;
             }
             else {
-                newUrl = oldUrl + "&color=" + color;
+                newUrl = oldUrl + "&sort=" + value;
             }
         }
         else {
-            let replacement = "color=" + color;
-            newUrl = oldUrl.replace(/color=[a-zA-Z]+/, replacement);
+            let replacement = "sort=" + value;
+            newUrl = oldUrl.replace(/sort=[a-zA-Z]+/, replacement);
+        }
+        window.location.href = newUrl;
+    }
+    function ProducerSearch() {
+        const checkboxes = document.getElementsByName("producer_checkbox");
+        let oldUrl = window.location.href;
+        let newUrl = oldUrl.replace(/(&?)producer=\d+(&?)/i, "").replace(/\?$/,"");
+        for (let i = 0; i< checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                let value = checkboxes[i].value;
+                if (newUrl.indexOf("?") == -1) {
+                    newUrl = newUrl + "?producer=" + value;
+                }
+                else {
+                    newUrl = newUrl + "&producer=" + value;
+                }
+            }
         }
         window.location.href = newUrl;
     }

@@ -1,29 +1,29 @@
 const database = require("../utils/Database");
-class Color {
+class Producer {
     constructor() {
-        this.id = 0;
+        this.producer_id = 0;
         this.name = "";
-        this.hexcolor= "";
+        this.address = "";
     }
     static GetAll() {
         return new Promise((resolve, reject) => {
-            database.query("select * from color")
+            database.query("select * from producer")
                 .then(dataset =>resolve(dataset))
                 .catch(err => reject(err))
         })
     }
-    static getByName(name) {
+    static findById(id) {
         return new Promise((resolve, reject) => {
-            let sql = "select * from color where name='" + name + "'";
+            const sql = 'select * from producer where producer_id=' + id;
             database.query(sql)
                 .then(dataset => {
-                    if (dataset == null || dataset.length == 0)
-                        resolve(dataset);
+                    if (dataset != undefined)
+                        resolve(dataset[0]);
                     else
-                        resolve(dataset[0])
+                        resolve(dataset);
                 })
-                .catch(err => reject(err))
+                .catch(err => reject(err));
         })
     }
 }
-module.exports = Color;
+module.exports = Producer;
