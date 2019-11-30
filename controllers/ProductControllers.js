@@ -1,4 +1,6 @@
 const models = require('../Models/models');
+
+
 exports.Product = (req, res, next) => {
     let id = req.query.id;
     if (id===undefined)
