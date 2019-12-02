@@ -179,5 +179,26 @@
 <script src="js/active.js"></script>
 <script type="text/javascript"> var idx=window.location.toString().indexOf("#_=_"); if (idx>0) { window.location = window.location.toString().substring(0, idx); }
 </script>
+<script>
+    var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword(){
+        if(password.value < 6) {
+            password.setCustomValidity("Ít nhất 6 ký tự");
+        } else {
+            password.setCustomValidity('');
+        }
+        if(password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Không trùng mật khẩu");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
 </body>
 </html>
