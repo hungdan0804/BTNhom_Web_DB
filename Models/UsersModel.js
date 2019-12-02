@@ -17,7 +17,7 @@ class User {
     }
     static findById(id) {
         return new Promise((resolve, reject) => {
-            const sql = 'select * from user where user_id='+ id;
+            const sql = 'select * from users where user_id='+ id;
             database.query(sql)
                 .then(dataset => {
                     if (dataset != undefined)

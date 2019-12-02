@@ -8,7 +8,7 @@ var db = require('./utils/Database');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const passport=require('passport');
-
+var expressSession = require('express-session');
 var app = express();
 
 // view engine setup
@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({secret: 'keyboard cat',resave:true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/', indexRouter);

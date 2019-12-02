@@ -74,8 +74,12 @@
                         Tài khoản   <span class="fa fa-user"> </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        {{#if user}}
                         <li class="dropdown-item" ><a href="/thay-doi">Thông tin cá nhân</a></li>
-                        <li class="dropdown-item"><a href="/login">Đăng xuất</a></li>
+                            <li class="dropdown-item"><a href="/logout">Đăng xuất</a></li>
+                        {{else}}
+                            <li class="dropdown-item"><a href="/login">Đăng nhập</a></li>
+                        {{/if}}
                     </ul>
                 </li>
                 <li class="active"><a href="/">Trang chủ</a></li>
