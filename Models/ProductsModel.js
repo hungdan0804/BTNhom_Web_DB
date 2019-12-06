@@ -43,5 +43,16 @@ class Product {
                 .catch(err => reject(err));
         })
     }
+    static filterByProducers(ref_producer, listProduct) {
+        if (ref_producer === undefined) {
+            return listProduct;
+        }
+        if (!Array.isArray(ref_producer)) {
+            return listProduct.filter(n => n.PRODUCER_ID.toString() === ref_producer);
+        }
+        else {
+            return listProduct.filter(n => ref_producer.includes(n.PRODUCER_ID.toString()));
+        }
+    }
 }
 module.exports = Product;

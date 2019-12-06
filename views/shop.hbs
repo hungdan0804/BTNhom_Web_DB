@@ -55,12 +55,12 @@
 
         <div class="widget-desc">
             <div class="slider-range">
-                <div data-min="100000" data-max="10000000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="100000" data-value-max="10000000" data-label-result="">
+                <div data-min="100000" data-max="50000000" data-unit="" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="100000" data-value-max="50000000" data-label-result="">
                     <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="" id="slider_left"></span>
+                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="" id="slider_right"></span>
                 </div>
-                <div class="range-price">100000 - 10000000</div>
+                <div class="range-price" id="range_price">100000 - 50000000</div>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                             <p>Sắp xếp theo</p>
                             <form action="#" method="get">
                                 <select name="select" id="sortBydate" onchange="SortFilter()">
-                                    <option data-display="{{sort_value}}" value="newest">Mới nhất</option>
+                                    <option value="newest">Mới nhất</option>
                                     <option value="oldest">Cũ nhất</option>
                                     <option value="lowest">Giá thấp nhất</option>
                                     <option value="highest">Giá cao nhất</option>
@@ -103,11 +103,11 @@
                         <div class="view-product d-flex align-items-center">
                             <p>View</p>
                             <form action="#" method="get">
-                                <select name="select" id="viewProduct">
-                                    <option value="value">12</option>
-                                    <option value="value">24</option>
-                                    <option value="value">48</option>
-                                    <option value="value">96</option>
+                                <select name="select" id="viewProduct" onchange="PageMaxObject()">
+                                    <option value="6">6</option>
+                                    <option value="10">10</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
                                 </select>
                             </form>
                         </div>
@@ -116,114 +116,28 @@
             </div>
         </div>
 
-        <div class="row">
-            {{#product}}
-            <!-- Single Product Area -->
-            <div class="col-12 col-sm-6 col-md-12 col-xl-6">
-                <div class="single-product-wrapper">
-                    <!-- Product Image -->
-                    <a href="/product?id={{ID}}">
-                    <div class="product-img">
-                        <img style='height: 500px; width: 100%; object-fit: cover' src="{{PHOTO_LINK}}" alt="">
-                        <!-- Hover Thumb -->
-                        <img class="hover-img" style='height: 500px; width: 100%; object-fit: cover' src="img/product-img/product{{ID}}.jpg" alt="">
-                    </div>
-                    </a>
-                    <!-- Product Description -->
-                    <div class="product-description d-flex align-items-center justify-content-between">
-                        <!-- Product Meta Data -->
-                        <div class="product-meta-data">
-                            <div class="line"></div>
-                            <p class="product-price">{{PRICE}} VNĐ</p>
-                            <a href="/product?id={{ID}}">
-                                <h6>{{NAME}}</h6>
-                            </a>
-                        </div>
-                        <!-- Ratings & Cart -->
-                        <div class="ratings-cart text-right">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div class="cart">
-                                <a href="/shop" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                {{/product}}
+        <div class="row" id="list_product">
+
         </div>
 
         <div class="row">
             <div class="col-12">
-                <!-- Pagination
+                <!-- Pagination-->
                 <nav aria-label="navigation">
-                    <ul class="pagination justify-content-end mt-50">
-                        <li class="page-item active"><a class="page-link" href="#">01.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03.</a></li>
-                        <li class="page-item"><a class="page-link" href="#">04.</a></li>
-                    </ul>
+                    <div class="pagination justify-content-end mt-50" id="pagination-wrapper">
+                    </div>
                 </nav>
-                -->
             </div>
         </div>
     </div>
 </div>
+<script src="js/jquery/jquery-3.4.1.min.js"></script>
 <script>
-    function SortFilter() {
-        let sort_selector = document.getElementById("sortBydate");
-        let value = sort_selector.options[sort_selector.selectedIndex].value;
-        let oldUrl = window.location.href;
-        let newUrl = oldUrl;
-        if (oldUrl.match(/sort=[a-zA-Z]+/) == undefined) {
-            if (oldUrl.indexOf("?") == -1) {
-                newUrl = oldUrl + "?sort=" + value;
-            }
-            else {
-                newUrl = oldUrl + "&sort=" + value;
-            }
-        }
-        else {
-            let replacement = "sort=" + value;
-            newUrl = oldUrl.replace(/sort=[a-zA-Z]+/, replacement);
-        }
-        window.location.href = newUrl;
-    }
-    function ProducerSearch() {
-        const checkboxes = document.getElementsByName("producer_checkbox");
-        let oldUrl = window.location.href;
-        let newUrl = oldUrl.replace(/(&?)producer=\d+(&?)/gi, "").replace(/\?$/,"");
-        for (let i = 0; i< checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                let value = checkboxes[i].value;
-                if (newUrl.indexOf("?") == -1) {
-                    newUrl = newUrl + "?producer=" + value;
-                }
-                else {
-                    newUrl = newUrl + "&producer=" + value;
-                }
-            }
-        }
-        window.location.href = newUrl;
-    }
-    function PageLoaded() {
-        let url = window.location.href.toLowerCase();
-        let checkboxes = document.getElementsByName("producer_checkbox");
-        let producers = [...url.matchAll(/producer=\d+/g)];
-        producers.forEach(producer => {
-            const producer_id = producer[0].replace("producer=","");
-            for (let i=0; i<checkboxes.length; i++) {
-                if (checkboxes[i].value==producer_id) {
-                    checkboxes[i].checked = true;
-                    break;
-                }
-            }
-        })
-    }
-    document.addEventListener("DOMContentLoaded", PageLoaded);
+    let state = {
+        'querySet': {{{json product}}},
+        'page': 1,
+        'rows': 6,
+        'window': 5,
+    };
 </script>
+<script src="js/shop-script.js"></script>
