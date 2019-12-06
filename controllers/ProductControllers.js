@@ -13,6 +13,6 @@ exports.Product = (req, res, next) => {
         return models.Category.findById(rs1.CATEGORY_ID);
     }).then(rs2 => {
         product.CATEGORY = rs2.name;
-        res.render('product', { product: product});
+        res.render('product', { product: product,user: req.user,});
     });
 };
