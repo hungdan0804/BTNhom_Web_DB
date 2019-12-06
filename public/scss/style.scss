@@ -66,7 +66,7 @@ p {
 
 
 a {
-    @include transition(all 500ms ease 0s);
+
     text-decoration: none;
     outline: 0 solid transparent;
     color: $dark-color;
@@ -74,7 +74,7 @@ a {
     font-size: 12px;
     &:hover,
     &:focus {
-        @include transition(all 500ms ease 0s);
+
         text-decoration: none;
         outline: 0 solid transparent;
         color: $dark-color;

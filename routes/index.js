@@ -5,6 +5,7 @@ const models = require('../Models/models');
 const ShopController = require('../controllers/ShopController');
 const ProductController = require('../controllers/ProductControllers');
 const HomeController = require('../controllers/HomeControllers');
+const CommentController=require('../controllers/CommentController');
 require('../controllers/LoginController');
 const passport=require('passport');
 
@@ -14,6 +15,7 @@ const passport=require('passport');
 router.get('/', HomeController.Home);
 router.get('/shop', ShopController.Shop);
 router.get('/product', ProductController.Product);
+router.post('/product',CommentController.Comment)
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Express' });
 });
