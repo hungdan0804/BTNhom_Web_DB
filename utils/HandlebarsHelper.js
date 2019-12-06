@@ -1,6 +1,8 @@
-import * as Handlebars from "hbs";
-
-Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+let hbs = require('hbs');
+hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
+hbs.registerHelper('ifCond', function (v1, operator, v2, options) {
 
     switch (operator) {
         case '==':
@@ -27,3 +29,4 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
             return options.inverse(this);
     }
 });
+module.exports = hbs;
