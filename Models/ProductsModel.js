@@ -10,7 +10,7 @@ class Product {
     }
     static GetAll() {
         return new Promise((resolve, reject) => {
-            database.query("select * from product")
+            database.query("select * from product order by CREATED_DATE")
                     .then(dataset =>resolve(dataset))
                     .catch(err => reject(err))
         })
@@ -29,7 +29,7 @@ class Product {
     }
     static findByCategory(category_id) {
         return new Promise((resolve, reject) => {
-            const sql = `select * from product p, category c where c.category_id=${category_id} and c.category_id=p.CATEGORY_ID`;
+            const sql = `select * from product p, category c where c.category_id=${category_id} and c.category_id=p.CATEGORY_ID order by p.CREATED_DATE`;
             database.query(sql)
                 .then(dataset => resolve(dataset))
                 .catch(err => reject(err));
@@ -37,7 +37,7 @@ class Product {
     }
     static findByProducer(producer_id) {
         return new Promise((resolve, reject) => {
-            const sql = 'select * from product p, producer pr where pr.producer_id='+producer_id+' and pr.producer_id=p.PRODUCER_ID';
+            const sql = 'select * from product p, producer pr where pr.producer_id='+producer_id+' and pr.producer_id=p.PRODUCER_ID order by p.CREATED_DATE';
             database.query(sql)
                 .then(dataset => resolve(dataset))
                 .catch(err => reject(err));

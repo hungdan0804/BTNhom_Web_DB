@@ -16,13 +16,13 @@ const addComment=(e)=>{
     var product = [...url.matchAll(/id=\d+/g)][0];
     var product_id=product.toString().replace("id=","");
 
-    fetch("http://localhost:3000/product",{
+    fetch("https://sql316324.herokuapp.com/product",{
         method:"POST",
         headers:{
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            comment:newComment,
+            comment:newComment.toString().trim().replace('\n','<br>'),
             product:product_id
         })
     })
@@ -36,6 +36,7 @@ commentForm.on("submit",addComment);
 
 const channel = pusher.subscribe('post');
 channel.bind('add', function(data) {
-    $('#comment-box').append('<div class="row"><div class="col-sm-2"> <div class="thumbnail"><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"></div></div>' +
-        '<div class="col-sm-10"><div class="panel panel-default"><div class="panel-heading"> <strong>'+data.username+'</strong></div><div class="panel-body">'+data.content+'</div></div></div>' +'</div><br>');
+    $('#new-comment-box').append('<div class="card" style="margin-bottom: 5px;"> <div class="card-header"> <div class="row"> <div class="col-xs-3">' +
+        '<img class="img-responsive user-photo avatar rounded-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="max-height: 30px; margin-right: 20px; margin-left: 20px;"></div>'+
+        '<div class="col-xs-9"><strong>'+data.username+'</strong> </div> </div> </div> <div class="card-body" style="white-space: pre-line;">'+data.content+' </div> </div>');
 });

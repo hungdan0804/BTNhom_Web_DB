@@ -33,7 +33,6 @@ exports.Shop = (req, res, next) => {
             product: listProducts,
             item_count: count,
             producers: listProducers,
-            sort_value: GetSortValue(ref_sort),
             user: req.user,
         });
     });
