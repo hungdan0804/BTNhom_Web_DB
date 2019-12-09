@@ -36,7 +36,7 @@ commentForm.on("submit",addComment);
 
 const channel = pusher.subscribe('post');
 channel.bind('add', function(data) {
-    $('#new-comment-box').append('<div class="card" style="margin-bottom: 5px;"> <div class="card-header"> <div class="row"> <div class="col-xs-3">' +
+    $('#new-comment-box').append('<div class="card" style="margin-bottom: 5px;"> <div class="card-header bg-primary"> <div class="row"> <div class="col-xs-3">' +
         '<img class="img-responsive user-photo avatar rounded-circle" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="max-height: 30px; margin-right: 20px; margin-left: 20px;"></div>'+
         '<div class="col-xs-9"><strong>'+data.username+'</strong> </div> </div> </div> <div class="card-body" style="white-space: pre-line;">'+data.content+' </div> </div>');
 });
