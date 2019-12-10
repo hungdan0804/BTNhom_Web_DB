@@ -31,7 +31,7 @@
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a class="gallery_img" href="{{product.PHOTO_LINK}}">
-                                    <img class="d-block w-100" src="{{product.PHOTO_LINK}}" alt="First slide">
+                                    <img class="d-block w-100" src="../{{product.PHOTO_LINK}}" alt="First slide">
                                 </a>
                             </div>
                         </div>
@@ -103,14 +103,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="/product?id={{product.ID}}" id="comment-form" method="post">
+                        <form action="/shop/product?id={{product.ID}}" id="comment-form" method="post">
                             <textarea class="comment form-control" name="comment" id="comment-content" rows="5"></textarea><br>
                             <button type="submit" id="comment" class="myButton">Viết bình luận</button>
                         </form>
                     </div><!-- /panel-body -->
                 </div><!-- /panel panel-default -->
             {{else}}
-                <form action="/login">
+                <form action="/user/login">
                     <button type="submit"  class="myButton2">Đăng nhập để viết đánh giá</button>
                 </form><br>
             {{/if}}

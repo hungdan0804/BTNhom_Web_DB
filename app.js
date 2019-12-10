@@ -5,8 +5,9 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let mysql=require('mysql');
 let db = require('./utils/Database');
-let indexRouter = require('./routes/index');
-let usersRouter = require('./routes/users');
+const indexRouter=require('./routes/index');
+const usersRouter = require('./routes/users');
+const shopRouter=require('./routes/shop');
 const passport=require('passport');
 let expressSession = require('express-session');
 let app = express();
@@ -23,8 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'keyboard cat',resave:true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/',indexRouter);
+app.use('/user', usersRouter);
+app.use('/shop',shopRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
