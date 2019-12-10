@@ -89,6 +89,7 @@ function PageLoaded() {
     let right = document.getElementById("slider_right");
     if (toValue.length === 0) {
         right.style.left = "100%";
+        background.style.width = (100 - percent_left).toString() + "%";
         rangeValue = rangeValue + "50000000";
     }
     else {

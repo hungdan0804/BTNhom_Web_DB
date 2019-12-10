@@ -54,5 +54,8 @@ class Product {
             return listProduct.filter(n => ref_producer.includes(n.PRODUCER_ID.toString()));
         }
     }
+    static filterByPrice(listProduct, from_amount, to_amount) {
+        return listProduct.filter(n => parseInt(n.PRICE) >= from_amount && parseInt(n.PRICE) <= to_amount);
+    }
 }
 module.exports = Product;
