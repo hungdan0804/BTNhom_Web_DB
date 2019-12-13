@@ -1,19 +1,44 @@
 const models = require('../Models/models');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy=require('passport-facebook').Strategy;
+const GoogleStrategy=require('passport-google-oauth20').Strategy;
 const passport=require('passport');
 const hashHelper=require('../utils/HashHelper');
 
 
-    passport.serializeUser(function (user,
-                                     done) {
-        done(null,user[0].user_id);
+    passport.serializeUser(function (user,done) {
+        done(null,user.user_id);
     });
     passport.deserializeUser(function (id,done) {
         models.User.findById(id).then(res =>{
             done(null,res);
         })
     });
+
+    passport.use(new GoogleStrategy({
+        clientID:process.env.PASSPORT_GG_CLIENTID,
+        clientSecret:process.env.PASSPORT_GG_CLIENTSECRET,
+        callbackURL:process.env.PASSPORT_GG_CALLBACKURL,
+        profileFields:['email']
+        },(accessToken, refreshToken, profile,done)=>{
+        var user;
+        models.User.findByUsername(profile._json.email).then((res)=>{
+            user=res;
+            if(res.length){
+                return done(null,user[0]);
+            }
+            user.username=profile._json.email;
+            user.name=profile._json.name;
+            user.email=profile._json.email;
+            return models.User.insert(user.username,"",user.name,user.email,"")
+        }).then((res)=>{
+            if(res != undefined){
+            user.user_id=res.insertId;
+            }
+            return done(null,user);
+        });
+        })
+    );
 
     passport.use(new FacebookStrategy(
         {
@@ -23,8 +48,8 @@ const hashHelper=require('../utils/HashHelper');
             profileFields:['email','displayName']
         },
         (accessToken, refreshToken, profile,done)=>{
+            var user;
             models.User.findByUsername(profile._json.email).then((res)=>{
-                let user;
                 user=res;
                 if(res.length){
                     return done(null,user);
@@ -32,14 +57,13 @@ const hashHelper=require('../utils/HashHelper');
                 user.username=profile._json.email;
                 user.name=profile._json.name;
                 user.email=profile._json.email;
-                models.User.insert(user.username,"",user.name,user.email,"").then((res)=>{
-                    user.user_id=res.insertId;
-                    users[0]=user;
-                    return done(null,users);
-                });
+                return models.User.insert(user.username,"",user.name,user.email,"")
+            }).then((res)=>{
+                user.user_id=res.insertId;
+                return done(null,user[0]);
             });
         }
-    ))
+    ));
 
     passport.use('local-login',new LocalStrategy(
         (username,password,done)=>{
