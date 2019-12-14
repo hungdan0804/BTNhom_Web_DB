@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const ForgotPassword=require('../controllers/FogotPasswordController');
 const passport=require('passport');
 require('../controllers/LoginController');
 
@@ -14,6 +15,15 @@ router.get('/logout',(req,res)=> {
 router.get('/quen-mat-khau', function(req, res, next) {
   res.render('forgot_password', { title: 'Express' });
 });
+router.post('/quen-mat-khau',ForgotPassword.ForgotPassword);
+
+
+router.get('/change-password',(req,res,next) =>{
+    res.render('change_password');
+});
+
+router.post('/change-password',ForgotPassword.ChangePassword);
+
 router.get('/dang-ky', function(req, res, next) {
   res.render('signup', { title: 'Express' });
 });

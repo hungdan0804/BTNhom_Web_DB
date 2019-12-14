@@ -15,6 +15,13 @@ class User {
                 .catch(err => reject(err))
         })
     }
+    static UpdatePassword(username,New) {
+        return new Promise((resolve, reject) => {
+            database.query("update users set password='"+New+"'where username like '"+username+"'")
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
+        })
+    }
     static findById(id) {
         return new Promise((resolve, reject) => {
             const sql = 'select * from users where user_id='+ id;
@@ -30,6 +37,14 @@ class User {
     static findByUsername(username) {
         return new Promise((resolve, reject) => {
             const sql = "select * from users where username like '"+username+"'";
+            database.query(sql)
+                .then(dataset => resolve(dataset))
+                .catch(err => reject(err));
+        })
+    }
+    static findByEmail(email) {
+        return new Promise((resolve, reject) => {
+            const sql = "select * from users where email like '"+email+"'";
             database.query(sql)
                 .then(dataset => resolve(dataset))
                 .catch(err => reject(err));

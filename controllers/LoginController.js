@@ -52,7 +52,7 @@ const hashHelper=require('../utils/HashHelper');
             models.User.findByUsername(profile._json.email).then((res)=>{
                 user=res;
                 if(res.length){
-                    return done(null,user);
+                    return done(null,user[0]);
                 }
                 user.username=profile._json.email;
                 user.name=profile._json.name;
@@ -60,7 +60,7 @@ const hashHelper=require('../utils/HashHelper');
                 return models.User.insert(user.username,"",user.name,user.email,"")
             }).then((res)=>{
                 user.user_id=res.insertId;
-                return done(null,user[0]);
+                return done(null,user);
             });
         }
     ));
@@ -76,7 +76,7 @@ const hashHelper=require('../utils/HashHelper');
                 if(!hashHelper.isValidPassword(user,password)){
                     return done(null,false);
                 }
-                return done(null,user);
+                return done(null,user[0]);
             });
         })
     );
