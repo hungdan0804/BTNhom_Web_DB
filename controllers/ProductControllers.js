@@ -5,7 +5,7 @@ exports.Product = (req, res, next) => {
     let id = req.query.id;
     if (id===undefined)
         res.redirect('/');
-    let product;
+    let product, comments;
     models.Products.findById(id).then(rs1 => {
         if (rs1 === undefined)
             res.redirect('/');
@@ -15,6 +15,9 @@ exports.Product = (req, res, next) => {
         product.CATEGORY = rs2.name;
         return models.Comment.findByProductId(product.ID);
     }).then(rs3=>{
-        res.render('product', { product: product,user: req.user,comment: rs3});
+        comments = rs3;
+        return models.Products.GetRelatedProduct(id);
+    }).then(related_products => {
+        res.render('product', { product: product,user: req.user,comment: comments, related_product: related_products});
     });
 };

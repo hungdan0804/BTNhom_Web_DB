@@ -18,16 +18,6 @@
             <div class="col-12 col-lg-7">
                 <div class="single_product_thumb">
                     <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                        <!--<ol class="carousel-indicators">
-                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
-                            </li>
-                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
-                            </li>
-                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pro-big-3.jpg);">
-                            </li>
-                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
-                            </li>
-                        </ol>-->
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <a class="gallery_img" href="../{{product.PHOTO_LINK}}">
@@ -35,7 +25,17 @@
                                 </a>
                             </div>
                         </div>
+                        <ol class="carousel-indicators" data-toggle="tooltip" data-placement="top" title="Sản phẩm liên quan">
+                            {{#related_product}}
+                            <li class="active" data-target="#related_slider" style="background-image: url('../{{photo_link}}');" data-toggle="tooltip" data-placement="bottom" title="{{name}}">
+                                <a href="/shop/product?id={{id}}"> </a>
+                            </li>
+                            {{/related_product}}
+                        </ol>
                     </div>
+                    <style>
+                        #product_details_slider li a { margin: 0px; display: block; width: 100%; height: 100%; }
+                    </style>
                 </div>
             </div>
             <div class="col-12 col-lg-5">

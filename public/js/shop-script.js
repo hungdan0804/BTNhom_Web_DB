@@ -36,12 +36,12 @@ function ProducerSearch() {
 function sortAscDate(a,b) {
     let aDate = new Date(a.CREATED_DATE);
     let bDate = new Date(b.CREATED_DATE);
-    return aDate - bDate;
+    return bDate - aDate;
 }
 function sortDescDate(a,b) {
     let aDate = new Date(a.CREATED_DATE);
     let bDate = new Date(b.CREATED_DATE);
-    return bDate - aDate;
+    return aDate - bDate;
 }
 function sortAscPrice(a,b) {
     let numA = Number(a.PRICE);

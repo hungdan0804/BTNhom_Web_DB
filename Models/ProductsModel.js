@@ -10,9 +10,30 @@ class Product {
     }
     static GetAll() {
         return new Promise((resolve, reject) => {
-            database.query("select * from product order by CREATED_DATE")
+            database.query("select * from product order by CREATED_DATE desc")
                     .then(dataset =>resolve(dataset))
                     .catch(err => reject(err))
+        })
+    }
+    static GetTop9() {
+        return new Promise((resolve, reject) => {
+            database.query("select * from product order by CREATED_DATE limit 9")
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
+        })
+    }
+    static GetRelatedProduct(id) {
+        return new Promise((resolve, reject) => {
+            let sql = `select distinct b.product_id as id, p.PHOTO_LINK as photo_link, p.NAME as name,count(b.product_id) as amount
+                        from bill_detail b inner join product p
+                        on b.product_id=p.ID
+                        where bill_id 
+                        in (select bill_id from bill_detail where product_id=${id}) and b.product_id != ${id}
+                        group by id, photo_link, name
+                        order by amount desc limit 4`;
+            database.query(sql)
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
         })
     }
     static findById(id) {
