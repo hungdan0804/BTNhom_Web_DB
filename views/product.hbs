@@ -78,9 +78,18 @@
                                 <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
                             </div>
                         </div>
-                        <button type="submit" name="addtocart" value="5" class="btn amado-btn">Thêm vào giỏ</button>
+                        <button type="button" name="addtocart" value="5" class="btn amado-btn" onclick="AddThisToCart()">Thêm vào giỏ</button>
+                        <script>
+                            function AddThisToCart() {
+                                let amountInput = document.getElementById('qty');
+                                let id = {{product.ID}};
+                                let name = '{{product.NAME}}';
+                                let price = {{product.PRICE}};
+                                let amount = parseInt(amountInput.value);
+                                AddToCart(id, name, price, amount);
+                            }
+                        </script>
                     </form>
-
                 </div>
             </div>
         </div>

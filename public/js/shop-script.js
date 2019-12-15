@@ -101,6 +101,7 @@ function PageLoaded() {
         rangeValue = rangeValue + value;
     }
     document.getElementById("range_price").innerHTML = rangeValue;
+    buildTable('#list_product');
 }
 document.addEventListener("DOMContentLoaded", PageLoaded);
 function PageMaxObject() {
@@ -110,7 +111,7 @@ function PageMaxObject() {
         state.rows = parseInt(value);
     }
     $('#list_product').empty();
-    buildTable();
+    buildTable('#list_product');
 }
 function SortFilter() {
     let sort_selector = document.getElementById("sortBydate");
@@ -133,10 +134,9 @@ function SortFilter() {
     }
     state.querySet = querySet;
     $('#list_product').empty();
-    buildTable();
+    buildTable('#list_product');
 }
 //below is pagination
-buildTable('#list_product');
 function buildTable(container_id) {
     buildTableProductMain(state.querySet, state.page, state.rows);
 }
@@ -149,11 +149,12 @@ function buildTableProductMain(querySet, page, rows) {
 
     let data = pagination(querySet, page, rows);
     let myList = data.querySet;
-    pageButtons(data.pages, '#list_product');
+    pageButtons(data.pages, '#list_product', state.querySet);
 
     for (let i = 0; i<= myList.length; i++) {
         //Keep in mind we are using "Template Litterals to create rows"
         let each = myList[i];
+        let price = FormatMoney(each.PRICE);
         let row = `<div class="col-12 col-sm-6 col-md-12 col-xl-6">
                 <div class="single-product-wrapper">
             <a href="/shop/product?id=${each.ID}">
@@ -165,7 +166,7 @@ function buildTableProductMain(querySet, page, rows) {
             <div class="product-description d-flex align-items-center justify-content-between">
             <div class="product-meta-data">
             <div class="line"></div>
-            <p class="product-price">${each.PRICE} VNĐ</p>
+            <p class="product-price">${price} VNĐ</p>
             <a href="/shop/product?id=${each.ID}">
             <h6>${each.NAME}</h6>
             </a>
@@ -179,13 +180,26 @@ function buildTableProductMain(querySet, page, rows) {
             <i class="fa fa-star" aria-hidden="true"></i>
             </div>
             <div class="cart">
-            <a href="/shop" data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ"><img src="img/core-img/cart.png" alt=""></a>
+            <a data-toggle="tooltip" data-placement="left" title="Thêm vào giỏ" onclick="AddToCart(${each.ID},'${each.NAME}',${each.PRICE}, 1)"><img src="img/core-img/cart.png" alt=""></a>
             </div>
             </div>
             </div>
             </div>
             </div>
-            `
+            `;
         table.append(row);
+    }
+}
+function Search() {
+    let keyword = document.getElementById("search_input").value.toLowerCase();
+    if (keyword != null && keyword !== '') {
+        let querySet = state.querySet;
+        querySet = querySet.filter(n => n.NAME.toLowerCase().includes(keyword));
+        $('#list_product').empty();
+        buildTableQuerySet(querySet);
+    }
+    else {
+        $('#list_product').empty();
+        buildTableQuerySet(state.querySet);
     }
 }

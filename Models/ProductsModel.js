@@ -27,6 +27,18 @@ class Product {
                 }).catch(err => reject(err));
         })
     }
+    static getNameById(id) {
+        return new Promise((resolve, reject) => {
+            const sql = 'select * from product where ID='+ id;
+            database.query(sql)
+                .then(dataset => {
+                    if (dataset != undefined)
+                        resolve(dataset[0].NAME);
+                    else
+                        resolve('');
+                }).catch(err => reject(err));
+        })
+    }
     static findByCategory(category_id) {
         return new Promise((resolve, reject) => {
             const sql = `select * from product p, category c where c.category_id=${category_id} and c.category_id=p.CATEGORY_ID order by p.CREATED_DATE`;

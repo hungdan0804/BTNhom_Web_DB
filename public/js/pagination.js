@@ -12,7 +12,7 @@ function pagination(querySet, page, rows) {
         'pages': pages,
     }
 }
-function pageButtons(pages, container_id) {
+function pageButtons(pages, container_id, querySet) {
     let wrapper = document.getElementById('pagination-wrapper');
 
     wrapper.innerHTML = ``;
@@ -58,7 +58,7 @@ function pageButtons(pages, container_id) {
 
         state.page = Number($(this).val());
 
-        buildTable(container_id);
+        buildTableQuerySet(querySet);
     })
 
 }

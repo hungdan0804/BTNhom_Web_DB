@@ -18,7 +18,7 @@ exports.ForgotPassword=(req,res,next)=> {
                 to: req.body.email,
                 subject: 'Quên mật khẩu',
                 text: 'Bạn nhân được mail từ ' + req.body.email,
-                html: '<p><b>Chào Bạn '+res2[0].username+'</b><p>Nhấp vào đường link bên dưới để phục hồi lại mật khẩu</p><a href="'+process.env.SERVER_GMAIL_SEND_URL+'?username='+res2[0].username+'">http://localhost:3000/user/change-password</a></p>'
+                html: '<p><b>Chào Bạn '+res2[0].username+'</b><p>Nhấp vào đường link bên dưới để phục hồi lại mật khẩu</p><a href="'+process.env.SERVER_GMAIL_SEND_URL+'?username='+res2[0].username+'">https://sql316324.herokuapp.com/user/change-password</a></p>'
             }
             transporter.sendMail(mainOptions, function (err, info) {
                 if (err) {

@@ -8,6 +8,7 @@ let db = require('./utils/Database');
 const indexRouter=require('./routes/index');
 const usersRouter = require('./routes/users');
 const shopRouter=require('./routes/shop');
+const cartRouter = require('./routes/cart.js');
 const passport=require('passport');
 let expressSession = require('express-session');
 let app = express();
@@ -27,7 +28,7 @@ app.use(passport.session());
 app.use('/',indexRouter);
 app.use('/user', usersRouter);
 app.use('/shop',shopRouter);
-
+app.use('/cart', cartRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

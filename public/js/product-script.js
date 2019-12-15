@@ -1,5 +1,8 @@
 //below is pagination
 buildTable('#comment-wrapper');
+function buildTableQuerySet(querySet) {
+    buildTableCommentMain(querySet, state.page, state.rows);
+}
 function buildTable(container_id) {
     buildTableCommentMain(state.querySet, state.page, state.rows);
 }
@@ -9,7 +12,7 @@ function buildTableCommentMain(querySet, page, rows) {
 
     let data = pagination(querySet, page, rows);
     let myList = data.querySet;
-    pageButtons(data.pages, '#comment-wrapper');
+    pageButtons(data.pages, '#comment-wrapper', querySet);
 
     for (let i = 0; i<= myList.length; i++) {
         //Keep in mind we are using "Template Litterals to create rows"
