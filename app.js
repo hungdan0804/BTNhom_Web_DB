@@ -25,10 +25,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'keyboard cat',resave:true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req,res,next)=>{
+  if(req.user){
+    if(req.user.is_active !=0) {
+      res.locals.user = req.user || null;
+    }
+  }
+  next();
+});
 app.use('/',indexRouter);
 app.use('/user', usersRouter);
 app.use('/shop',shopRouter);
 app.use('/cart', cartRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

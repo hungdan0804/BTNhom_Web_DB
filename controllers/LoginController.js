@@ -84,8 +84,7 @@ const hashHelper=require('../utils/HashHelper');
             passReqToCallback : true
         },
         (req, username, password, done) => {
-            const users =[];
-            const user=new models.User();
+            var user=new models.User();
             models.User.findByUsername(username).then((res) => {
                 if (res.length) {
                     return done(null, false);
@@ -95,11 +94,10 @@ const hashHelper=require('../utils/HashHelper');
                 user.name=req.param('name');
                 user.email=req.param('email');
                 user.phone=req.param('phone');
-                models.User.insert(user.username,user.password,user.name,user.email,user.phone).then((res)=>{
-                    user.user_id=res.insertId;
-                    users[0]=user;
-                    return done(null,users);
-                });
+                return models.User.insert(user.username,user.password,user.name,user.email,user.phone);
+            }).then((res)=>{
+                user.user_id=res.insertId;
+                return done(null,user);
             });
         }
     ));

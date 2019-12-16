@@ -48,7 +48,6 @@ exports.Shop = (req, res, next) => {
             product: listProducts,
             item_count: count,
             producers: listProducers,
-            user: req.user,
         });
     });
 };
