@@ -7,9 +7,6 @@ const Pusher=require('../utils/PusherConfig');
 router.get('/', ShopController.Shop);
 router.get('/product', ProductController.Product);
 router.post('/product',Pusher.Comment);
-router.get('/thanh-toan', function(req, res, next) {
-    res.render('thanh_toan', { title: 'Express' });
-});
 
 router.get('/top10', function(req, res, next) {
     res.render('top10', { title: 'Express' });

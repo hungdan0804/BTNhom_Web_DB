@@ -5,10 +5,11 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let mysql=require('mysql');
 let db = require('./utils/Database');
-const indexRouter=require('./routes/index');
+const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const shopRouter=require('./routes/shop');
+const shopRouter = require('./routes/shop');
 const cartRouter = require('./routes/cart.js');
+const checkoutRouter = require('./routes/checkout');
 const passport=require('passport');
 let expressSession = require('express-session');
 let app = express();
@@ -29,6 +30,7 @@ app.use('/',indexRouter);
 app.use('/user', usersRouter);
 app.use('/shop',shopRouter);
 app.use('/cart', cartRouter);
+app.use('/checkout', checkoutRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
