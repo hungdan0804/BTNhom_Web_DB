@@ -18,6 +18,6 @@ exports.Product = (req, res, next) => {
         comments = rs3;
         return models.Products.GetRelatedProduct(id);
     }).then(related_products => {
-        res.render('product', { product: product,user: req.user,comment: comments, related_product: related_products});
+        res.render('product', { product: product,comment: comments, related_product: related_products});
     });
 };

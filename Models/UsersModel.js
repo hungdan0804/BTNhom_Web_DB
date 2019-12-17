@@ -22,6 +22,13 @@ class User {
                 .catch(err => reject(err))
         })
     }
+    static UpdateActive(username) {
+        return new Promise((resolve, reject) => {
+            database.query("update users set is_active='"+1+"'where username like '"+username+"'")
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
+        })
+    }
     static findById(id) {
         return new Promise((resolve, reject) => {
             const sql = 'select * from users where user_id='+ id;

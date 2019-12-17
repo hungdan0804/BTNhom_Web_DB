@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const ForgotPassword=require('../controllers/FogotPasswordController');
+const ConfirmEmailController=require('../controllers/ConfirmEmailController');
 const passport=require('passport');
 require('../controllers/LoginController');
 
@@ -43,17 +44,19 @@ router.get("/auth/google/callback", passport.authenticate('google',{
 }));
 
 
-router.post('/login',passport.authenticate('local-login',{
-  successRedirect:'/',
-  failureRedirect:'/user/Login',
+router.post('/login',passport.authenticate('local-login', {
+    successRedirect: '/',
+    failureRedirect: '/user/Login',
 }));
 
 router.post('/dang-ky',passport.authenticate('local-signup',{
-  successRedirect:'/user/Login',
+  successRedirect:'/user/ConfirmEmail',
   failureRedirect:'/user/dang-ky',
 }));
 router.get('/thay-doi', function(req, res, next) {
-  res.render('edit_profile', { user:req.user});
+  res.render('edit_profile');
 });
+router.get('/ConfirmEmail',ConfirmEmailController.ConfirmPassword );
+router.get('/ConfirmEmailCallBack',ConfirmEmailController.ConfirmPasswordCallBack);
 
 module.exports = router;
