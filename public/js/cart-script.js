@@ -5,6 +5,7 @@ function InitCart() {
     if (cart !== null)
         return;
     let cartObj = {
+        "total_price": 0,
         "products": [],
     };
     let cartObjStr = JSON.stringify(cartObj);
@@ -27,7 +28,11 @@ function AddToCart(id, name, price, amount) {
         for (let i=0;i<cart.products.length; i++) {
             let n = cart.products[i];
             if (n.id == id) {
-                n.amount = parseInt(n.amount) + amount;
+                let new_amount = parseInt(n.amount) + amount;
+                cart.total_price = cart.total_price - parseInt(n.price)*parseInt(n.amount) + new_amount*price;
+                n.amount = new_amount;
+                n.price = price;
+                n.name = name;
                 exists = true;
                 break;
             }
@@ -35,6 +40,7 @@ function AddToCart(id, name, price, amount) {
     }
     if (exists === false) {
         cart.products.push(CartProducts(id, name, price,amount));
+        cart.total_price = cart.total_price + price * amount;
     }
     window.localStorage.removeItem('cart');
     window.localStorage.setItem('cart', JSON.stringify(cart));
@@ -48,7 +54,10 @@ function EditInCart(id, name, price, amount) {
         for (let i=0;i<cart.products.length; i++) {
             let n = cart.products[i];
             if (n.id == id) {
+                cart.total_price = cart.total_price - n.price*n.amount + price*parseInt(amount);
                 n.amount = parseInt(amount);
+                n.price = price;
+                n.name = name;
                 break;
             }
         }
@@ -63,7 +72,11 @@ function DeleteFromCart(id) {
     let cart = JSON.parse(cartStorage);
     if (cart.products.length > 0) {
         const index = cart.products.findIndex(n => n.id === id);
-        if (index !== undefined) cart.products.splice(index, 1);
+        if (index !== undefined) {
+            let product = cart.products[index];
+            cart.total_price -= parseInt(product.amount) * parseInt(product.price);
+            cart.products.splice(index, 1)
+        };
     }
     window.localStorage.removeItem('cart');
     window.localStorage.setItem('cart', JSON.stringify(cart));
@@ -81,6 +94,4 @@ function EditCartBadge() {
     cart.products.forEach(n => total += parseInt(n.amount));
     let badge = document.getElementById('cart_span_icon');
     badge.innerHTML = total;
-}
-function MoveToSession() {
 }
