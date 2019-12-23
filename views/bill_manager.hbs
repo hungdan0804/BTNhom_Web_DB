@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="../css/mdbcss/mdb.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+<style src="../css/datatable.css"></style>
+<link href="../css/mdbcss/addons/datatables.min.css" rel="stylesheet">
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="cart-table clearfix">
+                    <h2>Lịch sử mua hàng</h2> <br>
+                    <table class="table" id="my_bill_table" cellspacing="0" width="100%">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>Ngày đặt hàng</th>
+                            <th>Trạng thái</th>
+                            <th>Tổng tiền</th>
+                            <th>Xem</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#bills}}
+                            <tr>
+                                <td>
+                                    {{created_date}}
+                                </td>
+                                <td>
+                                    {{{status}}}
+                                </td>
+                                <td>
+                                    {{total_price}}
+                                </td>
+                                <td>
+                                    <a href="/user/billdetail?id={{bill_id}}">
+                                    <span class="fa fa-eye"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        {{/bills}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#my_bill_table').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+<script type="text/javascript" src="../js/mdbjs/addons/datatables.min.js"></script>
+
+<script type="text/javascript" src="../js/mdbjs/mdb.js"></script>

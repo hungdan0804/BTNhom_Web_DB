@@ -44,5 +44,27 @@ class Bill {
                 .catch(err => reject(err));
         })
     }
+    static GetAllWithCustomerName() {
+        return new Promise((resolve, reject) => {
+            database.query("select b.*, u.fullname as customer_name from bill b, users u where u.user_id=b.customer")
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
+        })
+    }
+    static GetByCustomer(user_id) {
+        return new Promise((resolve, reject) => {
+            database.query(`select * from bill where customer=${user_id}`)
+                .then(dataset =>resolve(dataset))
+                .catch(err => reject(err))
+        })
+    }
+    static findByIdWithCustomerName(id) {
+        return new Promise((resolve, reject) => {
+            const sql = `select b.*, u.fullname as customer_name from bill b, users u where b.bill_id=${id} and u.user_id=b.customer`;
+            database.query(sql)
+                .then(dataset => resolve(dataset[0]))
+                .catch(err => reject(err));
+        })
+    }
 }
 module.exports = Bill;

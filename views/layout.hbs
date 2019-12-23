@@ -81,7 +81,7 @@
                             <li class="dropdown-item"><a href="/user/logout">Đăng xuất</a></li>
                         {{else}}
                             <li class="dropdown-item"><a href="/user/login">Đăng nhập</a></li>
-                            <li class="dropdown-item"><a href="/user/dang-ky">Đăng ký</a></li>
+                            <li class="dropdown-item"><a href="/user/signup">Đăng ký</a></li>
                         {{/if}}
                     </ul>
                 </li>
@@ -92,20 +92,20 @@
                         <a href="/cart" class="cart-nav"><img src="../img/core-img/cart.png" alt=""> Giỏ hàng <span class="badge badge-primary" style="color: white" id="cart_span_icon">0</span></a>
                 </li>
                 {{#if user}}
-                    <li><a href="#" class="fav-nav"><img src="../img/core-img/favorites.png" alt=""> Lịch sử</a></li>
+                    <li><a href="/user/bill" class="fav-nav"><img src="../img/core-img/favorites.png" alt=""> Lịch sử</a></li>
                 {{/if}}
                 <li>
-                    <a href="#" class="search-nav"><img src="../img/core-img/search.png" alt=""> Tìm kiếm</a>
+                    <a href="/shop" class="search-nav"><img src="../img/core-img/search.png" alt=""> Tìm kiếm</a>
                 </li>
             </ul>
         </nav>
         <!-- Cart Menu -->
 
         <!-- Button Group -->
-        <div class="amado-btn-group mt-30 mb-100">
+        <!--<div class="amado-btn-group mt-30 mb-100">
             <a href="#" class="btn amado-btn mb-15">%Discount%</a>
             <a href="/shop/top10" class="btn amado-btn active">Top 10</a>
-        </div>
+        </div>-->
         <!-- Social Button -->
         <div class="social-info d-flex justify-content-between">
             <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>

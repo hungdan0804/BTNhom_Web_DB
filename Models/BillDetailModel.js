@@ -28,5 +28,13 @@ class BillDetail {
                 .catch(err => reject(err));
         })
     }
+    static findByBillIdWithProductName(id) {
+        return new Promise((resolve, reject) => {
+            const sql = 'select d.*, p.NAME as product_name from bill_detail d, product p where p.ID=d.product_id and d.bill_id=' + id;
+            database.query(sql)
+                .then(dataset => resolve(dataset))
+                .catch(err => reject(err));
+        })
+    }
 }
 module.exports = BillDetail;

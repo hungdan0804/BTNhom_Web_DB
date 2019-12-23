@@ -1,0 +1,65 @@
+<link rel="stylesheet" href="../css/mdbcss/mdb.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+<style src="../css/datatable.css"></style>
+<link href="../css/mdbcss/addons/datatables.min.css" rel="stylesheet">
+<div class="cart-table-area section-padding-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="cart-table clearfix">
+        <h3 class="title-3 m-b-30"><i class="zmdi zmdi-account-calendar"></i>Quản lý đơn hàng</h3><br>
+        <div class="card" style="width: 30em; align-self: center">
+            <div class="card-header">
+                <h5>Đơn hàng</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Tên khách hàng: {{bill.customer_name}}</li>
+                <li class="list-group-item">Ngày đặt: {{bill.created_date}}</li>
+                <li class="list-group-item">Trạng thái: {{{bill.status}}}</li>
+                <li class="list-group-item">Tổng: {{{bill.total_price}}} VNĐ</li>
+                <li class="list-group-item">Mô tả: <br> {{{bill.description}}}</li>
+            </ul>
+        </div>
+        <table class="table" id="my_bill_table" cellspacing="0" width="100%">
+            <thead class="thead-light">
+            <tr>
+                <th>ID sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#details}}
+                <tr>
+                    <td>
+                        {{product_id}}
+                    </td>
+                    <td>
+                        {{product_name}}
+                    </td>
+                    <td>
+                        {{amount}}
+                    </td>
+                    <td>
+                        <a href="/shop/product?id={{product_id}}"><span class="fa fa-eye"></span>&ensp;Xem</a>
+                    </td>
+                </tr>
+            {{/details}}
+            </tbody>
+        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#my_bill_table').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
+<script type="text/javascript" src="../js/mdbjs/addons/datatables.min.js"></script>
+
+<script type="text/javascript" src="../js/mdbjs/mdb.js"></script>
