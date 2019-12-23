@@ -37,7 +37,25 @@ exports.ForgotPassword=(req,res,next)=> {
 }
 exports.ChangePassword=(req,res,next)=>{
     const hashedPassword=bycrypt.createHash(req.body.password);
-    model.UpdatePassword(req.query.username,hashedPassword).then(res2=>{
-        res.redirect('/user/login');
-    });
-}
+    if(req.body.old_password !== undefined){
+       model.findByUsername(req.query.username).then(res2=>{
+           if(bycrypt.isValidPassword(res2,req.body.old_password)){
+               return model.UpdatePassword(req.query.username,hashedPassword);
+           }else{
+               return false;
+           }
+       }).then(res3=>{
+           if(res3){
+               req.logout();
+               res.redirect('/user/login');
+           }else{
+               res.render('change_password',{error: "Mật khẩu không chính xác"});
+           }
+       });
+    }else{
+        model.UpdatePassword(req.query.username,hashedPassword).then(res3=>{
+            req.logout();
+            res.redirect('/user/login');
+        });
+    }
+};

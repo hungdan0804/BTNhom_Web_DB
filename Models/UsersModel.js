@@ -48,6 +48,14 @@ class User {
                 }).catch(err => reject(err));
         })
     }
+    static findByPassword(password) {
+        return new Promise((resolve, reject) => {
+            const sql = "select * from users where password like '"+password+"'";
+            database.query(sql)
+                .then(dataset => resolve(dataset))
+                .catch(err => reject(err));
+        })
+    }
     static findByUsername(username) {
         return new Promise((resolve, reject) => {
             const sql = "select * from users where username like '"+username+"'";
