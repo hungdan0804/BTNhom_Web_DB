@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const ForgotPassword=require('../controllers/FogotPasswordController');
 const ConfirmEmailController=require('../controllers/ConfirmEmailController');
+const EditProfileController=require('../controllers/EditProfileController');
 const passport=require('passport');
 require('../controllers/LoginController');
 
@@ -53,9 +54,8 @@ router.post('/dang-ky',passport.authenticate('local-signup',{
   successRedirect:'/user/ConfirmEmail',
   failureRedirect:'/user/dang-ky',
 }));
-router.get('/thay-doi', function(req, res, next) {
-  res.render('edit_profile');
-});
+router.get('/thay-doi', EditProfileController.EditProfile_G);
+router.post('/thay-doi', EditProfileController.EditProfile_P);
 router.get('/ConfirmEmail',ConfirmEmailController.ConfirmPassword );
 router.get('/ConfirmEmailCallBack',ConfirmEmailController.ConfirmPasswordCallBack);
 

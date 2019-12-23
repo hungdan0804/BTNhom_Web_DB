@@ -5,46 +5,35 @@
         <div class="row">
             <!-- edit form column -->
             <div class="col-md-12 personal-info">
-                <!--<div class="alert alert-info alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>
-                    Đây là <strong>thông báo</strong>.
-                </div>-->
+<!--                <div class="alert alert-info alert-dismissable">-->
+<!--                    <a class="panel-close close" data-dismiss="alert">×</a>-->
+<!--                    <i class="fa fa-coffee"></i>-->
+<!--                    Đây là <strong>thông báo</strong>.-->
+<!--                </div>-->
                 <h3>Personal info</h3>
 
-                <form class="form-horizontal" action="#" role="form">
+                <form class="form-horizontal" action="#" method="post" role="form">
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Họ tên:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="{{user.fullname}}">
+                            <input class="form-control" name="fullname" type="text" value="{{user.fullname}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email:</label>
                             <div class="col-lg-8">
-                                <input class="form-control" type="email" value="{{user.email}}">
+                                <input class="form-control" name="email" type="email" value="{{user.email}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-md-3 control-label">Tên đăng nhập:</label>
                             <div class="col-md-8">
-                                <input class="form-control" type="text" value="{{user.username}}">
+                                <input class="form-control" disabled="disabled" type="text" value="{{user.username}}">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Mật khẩu:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Nhập lại mật khẩu:</label>
-                            <div class="col-md-8">
-                                <input class="form-control" type="password" value="">
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-8">

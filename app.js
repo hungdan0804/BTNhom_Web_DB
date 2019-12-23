@@ -30,6 +30,9 @@ app.use((req,res,next)=>{
   if(req.user){
     if(req.user.is_active !=0) {
       res.locals.user = req.user || null;
+    }else{
+        res.render('confirm_email');
+        req.logout();
     }
   }
   next();
