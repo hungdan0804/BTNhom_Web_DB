@@ -9,26 +9,35 @@ function CartLoad() {
         i++;
         total += parseInt(n.amount) * parseInt(n.price);
         let price = FormatMoney(n.price);
-        AppendProduct(i,n.id,n.name,price,n.amount);
+        AppendProduct(i,n.id,n.name,n.price,n.amount, price);
     });
 
     document.getElementById('price_total').innerText = FormatMoney(total);
     document.getElementById('total_price').innerText = FormatMoney(total);
 }
 document.addEventListener('DOMContentLoaded', CartLoad, false);
+function UpdateCartTotal() {
+    let cartStorage = window.localStorage.getItem('cart');
+    let cart = JSON.parse(cartStorage);
+    let total = cart.total_price;
+    document.getElementById('price_total').innerText = FormatMoney(total);
+    document.getElementById('total_price').innerText = FormatMoney(total);
+}
 function OnPlus(id, name, price, amount) {
     let element_id = 'qty_' + id;
     let effect = document.getElementById(element_id); let qty = effect.value; if( !isNaN( qty )) effect.value++;
     amount = effect.value;
     EditInCart(id, name, price, amount);
+    UpdateCartTotal();
 }
 function OnMinus(id, name, price, amount) {
     let element_id = 'qty_' + id;
     let effect = document.getElementById(element_id); let qty = effect.value; if( !isNaN( qty ) && qty > 1 ) effect.value--;
     amount = effect.value;
     EditInCart(id, name, price, amount);
+    UpdateCartTotal();
 }
-function AppendProduct(order, id, name, price, amount) {
+function AppendProduct(order, id, name, price, amount, formatedPrice) {
     let product = `
         <tr>
                             <td class="cart_product_img">
@@ -38,7 +47,7 @@ function AppendProduct(order, id, name, price, amount) {
                                 <h5>${name}</h5>
                             </td>
                             <td class="price">
-                                <span>${price}</span>
+                                <span>${formatedPrice}</span>
                             </td>
                             <td class="qty">
                                 <div class="qty-btn d-flex">
