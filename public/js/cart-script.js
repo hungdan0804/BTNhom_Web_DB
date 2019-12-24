@@ -29,7 +29,7 @@ function AddToCart(id, name, price, amount) {
             let n = cart.products[i];
             if (n.id == id) {
                 let new_amount = parseInt(n.amount) + amount;
-                cart.total_price = cart.total_price - parseInt(n.price)*parseInt(n.amount) + new_amount*price;
+                cart.total_price = cart.total_price - parseInt(n.price)*parseInt(n.amount) + parseInt(new_amount)*parseInt(price);
                 n.amount = new_amount;
                 n.price = price;
                 n.name = name;
@@ -54,7 +54,7 @@ function EditInCart(id, name, price, amount) {
         for (let i=0;i<cart.products.length; i++) {
             let n = cart.products[i];
             if (n.id == id) {
-                cart.total_price = cart.total_price - n.price*n.amount + price*parseInt(amount);
+                cart.total_price = cart.total_price - n.price*n.amount + parseInt(price)*parseInt(amount);
                 n.amount = parseInt(amount);
                 n.price = price;
                 n.name = name;
