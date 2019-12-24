@@ -2,19 +2,23 @@ const Bill = require('../Models/BillModel');
 const BillDetail = require('../Models/BillDetailModel');
 let CryptoJS = require("crypto-js");
 exports.Checkout = (req, res, next) => {
-    if (req.user === undefined)
+    if (req.user === undefined){
         res.redirect('/user/login');
+        return;
+    }
     res.render('checkout', { title: 'Express' });
 };
 exports.CheckoutSuccess = (req, res, next) => {
-    if (req.user === undefined)
+    if (req.user === undefined) {
         res.redirect('/user/login');
+        return;
+    }
     res.render('checkout_success', { title: 'Checked out' });
 };
 exports.CheckoutPOST = (req, res, next) => {
-    // res.redirect('/checkout/success');
     if (req.user === undefined) {
         res.redirect('/');
+        return;
     }
     let user_id = req.user.user_id;
     let form = req.body;
