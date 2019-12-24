@@ -1,9 +1,11 @@
-let models = require('../models/models');
+let models = require('../Models/models');
 let utils = require('../utils/utils');
 
 exports.BillManager = (req, res, next) => {
-	if (req.user == undefined || req.user == null)
+	if (req.user == undefined || req.user == null) {
         res.redirect('/user/login');
+        return;
+    }
     let user_id = req.user.user_id;
     models.Bill.GetByCustomer(user_id).then(dataTable => {
         dataTable.forEach(n=> {
@@ -15,8 +17,10 @@ exports.BillManager = (req, res, next) => {
     });
 };
 exports.Bill = (req, res, next) => {
-	if (req.user == undefined || req.user == null)
+    if (req.user == undefined || req.user == null) {
         res.redirect('/user/login');
+        return;
+    }
 	let user_id = req.user.user_id;
     let id = req.query.id;
     let billQueryResult;
