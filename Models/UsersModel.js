@@ -29,9 +29,9 @@ class User {
                 .catch(err => reject(err))
         })
     }
-    static UpdateProfile(username,fullname,email) {
+    static UpdateProfile(username,fullname,phone,email) {
         return new Promise((resolve, reject) => {
-            database.query("update users set fullname='"+fullname+"' and email='"+ email+"' where username like '"+username+"'")
+            database.query("update users set fullname='"+fullname+"',email='"+ email+"',phone='"+phone+"' where username like '"+username+"'")
                 .then(dataset =>resolve(dataset))
                 .catch(err => reject(err))
         })
