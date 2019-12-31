@@ -20,14 +20,14 @@
                     <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <a class="gallery_img" href="../{{product.PHOTO_LINK}}">
-                                    <img class="d-block w-100" src="../{{product.PHOTO_LINK}}" alt="First slide">
+                                <a class="gallery_img" href="{{product.PHOTO_LINK}}">
+                                    <img class="d-block w-100" src="{{product.PHOTO_LINK}}" alt="First slide">
                                 </a>
                             </div>
                         </div>
                         <ol class="carousel-indicators" data-toggle="tooltip" data-placement="top" title="Sản phẩm liên quan">
                             {{#related_product}}
-                            <li class="active" data-target="#related_slider" style="background-image: url('../{{photo_link}}');" data-toggle="tooltip" data-placement="bottom" title="{{name}}">
+                            <li class="active" data-target="#related_slider" style="background-image: url('{{photo_link}}');" data-toggle="tooltip" data-placement="bottom" title="{{name}}">
                                 <a href="/shop/product?id={{id}}"> </a>
                             </li>
                             {{/related_product}}

@@ -159,8 +159,8 @@ function buildTableProductMain(querySet, page, rows) {
                 <div class="single-product-wrapper">
             <a href="/shop/product?id=${each.ID}">
             <div class="product-img">
-            <img style='height: 500px; width: 100%; object-fit: cover' src="../${each.PHOTO_LINK}" alt="">
-            <img class="hover-img" style='height: 500px; width: 100%; object-fit: cover' src="../img/product-img/product${each.ID}.jpg" alt="">
+            <img style='height: 500px; width: 100%; object-fit: cover' src="${each.PHOTO_LINK}" alt="">
+            <!--<img class="hover-img" style='height: 500px; width: 100%; object-fit: cover' src="../img/product-img/product${each.ID}.jpg" alt="">-->
             </div>
             </a>
             <div class="product-description d-flex align-items-center justify-content-between">
