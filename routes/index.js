@@ -4,5 +4,7 @@ const HomeController=require('../controllers/HomeControllers');
 
 
 router.get('/', HomeController.Home);
-
+router.get('/admin', function (req, res, next) {
+    res.status(301).redirect('http://admin-hcmus-1712324.herokuapp.com/');
+});
 module.exports = router;
