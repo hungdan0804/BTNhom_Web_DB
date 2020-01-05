@@ -16,7 +16,7 @@ const addComment=(e)=>{
     var product = [...url.matchAll(/id=\d+/g)][0];
     var product_id=product.toString().replace("id=","");
 
-    fetch("https://sql316324.herokuapp.com/product",{
+    fetch("https://sql316324.herokuapp.com/shop/product",{
         method:"POST",
         headers:{
             'Content-Type': 'application/json',
