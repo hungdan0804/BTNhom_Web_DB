@@ -96,7 +96,9 @@ const hashHelper=require('../utils/HashHelper');
                 user.phone=req.param('phone');
                 return models.User.insert(user.username,user.password,user.name,user.email,user.phone);
             }).then((res)=>{
-                user.user_id=res.insertId;
+                if(res) {
+                    user.user_id = res.insertId;
+                }
                 return done(null,user);
             });
         }
