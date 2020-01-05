@@ -3,7 +3,7 @@ class Utils {
         return (money_amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.00','');
     }
     static FormatDate(date) {
-        return date.getDate() + "/" + date.getMonth() + '/' + date.getFullYear();
+        return date.getDate() + "/" + (parseInt(date.getMonth())+1) + '/' + date.getFullYear();
     }
     static GetStatusBadge(status) {
         status = status.toString().toUpperCase();
