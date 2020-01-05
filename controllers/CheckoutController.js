@@ -22,11 +22,23 @@ exports.CheckoutPOST = (req, res, next) => {
     }
     let user_id = req.user.user_id;
     let form = req.body;
+
     let cart = CryptoJS.AES.decrypt(form.cart,'checkout').toString(CryptoJS.enc.Utf8);
     cart = JSON.parse(cart);
     if (cart.products.length == 0)
         res.redirect('/cart');
     let bill = new Bill();
+    bill.firstname = form.firstname;
+    bill.lastname = form.lastname;
+    bill.company = form.company;
+    bill.email = form.email;
+    bill.country = form.country;
+    bill.address = form.address;
+    bill.town = form.town;
+    bill.zipcode = form.zipcode;
+    bill.phone = form.phone;
+    bill.pay_type = form.pay_type;
+
     bill.customer = user_id;
     bill.description = form.comment;
     cart.products.forEach(n => {
