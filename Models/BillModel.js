@@ -29,8 +29,8 @@ class Bill {
         let sql = `insert into bill(customer, description, total_price, status,
                     firstname,lastname,company,email,country,address,town,zipcode,phone,pay_type) 
                     values (${this.customer},'${this.description}',${this.total_price},'${this.status}',
-                    '${this.firstname}','${this.lastname}','${this.company}','${this.email}','${this.country}','
-                    ${this.address}','${this.town}','${this.zipcode}','${this.phone}','${this.pay_type}'))`;
+                    '${this.firstname}','${this.lastname}','${this.company}','${this.email}','${this.country}',
+                    '${this.address}','${this.town}','${this.zipcode}','${this.phone}','${this.pay_type}')`;
         database.query(sql);
     }
     static GetAll() {

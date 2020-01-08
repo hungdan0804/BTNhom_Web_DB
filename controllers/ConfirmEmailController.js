@@ -14,7 +14,10 @@ exports.ConfirmPassword = (req, res, next) =>{
         to: res.locals.email,
         subject: 'Xác nhận Email',
         text: 'Bạn nhân được mail từ ' + res.locals.email,
-        html: '<p><b>Chào Bạn '+res.locals.username+'</b><p>Nhấp vào đường link bên dưới để xác nhận email</p><a href="'+process.env.SERVER_CONFIRM_GMAIL_SEND_URL+'?username='+res.locals.username+'">https://sql316324.herokuapp.com/user/confirm_email</a></p>'
+        html: '<p><b>Chào Bạn '+res.locals.username+'' +
+            '</b><p>Nhấp vào đường link bên dưới để xác nhận email</p>' +
+            '<a href="'+process.env.SERVER_CONFIRM_GMAIL_SEND_URL+'?username='+res.locals.username+'"' +
+            '>https://sql316324.herokuapp.com/user/confirm_email</a></p>'
     }
     transporter.sendMail(mainOptions, function (err, info) {
         if (err) {
